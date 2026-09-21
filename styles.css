@@ -1,0 +1,507 @@
+:root {
+  --bg: #fffbf7;
+  --bg-alt: #f5efe8;
+  --text: #0e0e0f;
+  --accent: #0e0e0f;
+  --muted: #6b6b6b;
+  --radius: 0.4em;
+
+  /* entrances: gentle, even deceleration so motion reads across the whole
+     duration instead of resolving almost instantly (avoid steeper "expo out"
+     curves here — their motion front-loads so hard that a longer duration
+     barely changes what's perceived) */
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* hover/press feedback: slight overshoot reads as springy */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --shadow-sm: 0 10px 24px -10px rgba(14, 14, 15, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 700;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem 6rem;
+  position: relative;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 34rem;
+}
+
+.avatar {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  background: center / cover no-repeat url("profile_picture.jpg");
+  margin-bottom: 1.5rem;
+  --reveal-order: 0;
+}
+
+/* composes the scroll-reveal offset (--enter-y) with the hover scale so
+   neither transition fights the other for the `transform` property */
+.avatar.reveal {
+  --hover-scale: 1;
+  transform: translateY(var(--enter-y)) scale(var(--hover-scale));
+  transition: opacity var(--reveal-duration) var(--ease-entrance),
+    transform var(--reveal-duration) var(--ease-spring);
+  /* the shorthand above resets delay to 0s, so restore the stagger explicitly */
+  transition-delay: calc(var(--reveal-order, 0) * 50ms);
+}
+
+.avatar:hover {
+  --hover-scale: 1.05;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 1.25rem;
+  --reveal-order: 1;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin-bottom: 2.25rem;
+}
+
+.bio span { min-width: 0; }
+.bio span:nth-child(1) { --reveal-order: 2; }
+.bio span:nth-child(2) { --reveal-order: 3; }
+.bio span:nth-child(3) { --reveal-order: 4; }
+
+.bio code {
+  display: inline-block;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  color: var(--text);
+  background: var(--bg-alt);
+  border: 1px solid #e4dcd2;
+  border-radius: var(--radius);
+  padding: 0.12em 0.45em;
+  letter-spacing: -0.02em;
+}
+
+.socials {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.socials li:nth-child(1) { --reveal-order: 5; }
+.socials li:nth-child(2) { --reveal-order: 6; }
+.socials li:nth-child(3) { --reveal-order: 7; }
+.socials li:nth-child(4) { --reveal-order: 8; }
+.socials li:nth-child(5) { --reveal-order: 9; }
+
+.socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  text-decoration: none;
+  transition: opacity 0.2s var(--ease-entrance), transform 0.2s var(--ease-spring);
+}
+
+.socials a:hover {
+  opacity: 0.55;
+  transform: translateY(-2px);
+}
+
+.socials a svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: var(--text);
+  fill: currentColor;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.2rem;
+  height: 2.2rem;
+  color: var(--text);
+  animation: bounce 1.8s ease-in-out infinite;
+}
+
+.scroll-cue svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+/* ---------- content sections ---------- */
+
+.content-section {
+  padding: 6rem 1.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.content-section.alt {
+  max-width: none;
+  background: var(--bg-alt);
+}
+
+.content-section h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+.content-section p {
+  color: var(--muted);
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+.content-section .copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.content-section .copy span {
+  min-width: 0;
+}
+
+.content-section p a {
+  color: #8a8a8a;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.tile {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #e7ded2, #cfc3af);
+  box-shadow: 0 10px 24px -10px rgba(14, 14, 15, 0);
+}
+
+/* see .avatar.reveal above for why the hover scale is composed in here
+   rather than set directly on .tile:hover */
+.tile.reveal {
+  --hover-scale: 1;
+  transform: translateY(var(--enter-y)) scale(var(--hover-scale));
+  transition: opacity var(--reveal-duration) var(--ease-entrance),
+    transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-entrance);
+  /* the shorthand above resets delay to 0s, so restore the stagger explicitly */
+  transition-delay: calc(var(--reveal-order, 0) * 50ms);
+}
+
+.tile:hover {
+  --hover-scale: 1.03;
+  box-shadow: var(--shadow-sm);
+}
+
+.gallery .tile:nth-child(1) { --reveal-order: 0; }
+.gallery .tile:nth-child(2) { --reveal-order: 1; }
+.gallery .tile:nth-child(3) { --reveal-order: 2; }
+.gallery .tile:nth-child(4) { --reveal-order: 3; }
+
+/* ---------- github banners ---------- */
+/* long, hand-drawn "parade flag" banners: a wooden rod up top, a tall
+   swallow-tailed cloth shape below rendered in SVG so the silhouette can
+   curve like fabric instead of the flat triangular pennant this used to be.
+   the .gh-defs svg (in the markup) holds the shared filter + path shapes
+   that every banner's <use> references reuse. */
+
+.gh-banners {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.25rem 2.5rem;
+  margin: 3.5rem auto 0;
+  max-width: 50rem;
+}
+
+.gh-banner {
+  --enter-y: -7rem;
+  --enter-scale: 0.5;
+  --reveal-duration: 1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 7.25rem;
+  transform-origin: top center;
+}
+
+.gh-banner.reveal {
+  transform: translateY(var(--enter-y)) scaleY(var(--enter-scale)) rotate(var(--banner-tilt, -2deg));
+  transition: opacity var(--reveal-duration) var(--ease-entrance),
+    transform 1.1s var(--ease-spring);
+  transition-delay: calc(var(--reveal-order, 0) * 110ms);
+}
+
+.gh-banner.reveal.visible {
+  --enter-y: 0px;
+  --enter-scale: 1;
+  --banner-tilt: 0deg;
+  animation: banner-sway 4.5s ease-in-out calc(var(--reveal-order, 0) * 110ms + 1s) infinite;
+}
+
+.gh-banner:hover.reveal.visible {
+  animation-duration: 1.8s;
+}
+
+.gh-banner:nth-child(1) { --banner-tilt: -4deg; }
+.gh-banner:nth-child(2) { --banner-tilt: 3deg; }
+.gh-banner:nth-child(3) { --banner-tilt: -2.5deg; }
+.gh-banner:nth-child(4) { --banner-tilt: 3.5deg; }
+
+.gh-banner-rod {
+  display: block;
+  width: 100%;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe9ae 0%, #f0c25e 35%, #d69a2e 70%, #a86e17 100%);
+  border: 2px solid #24160a;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset;
+  position: relative;
+  z-index: 2;
+}
+
+.gh-banner-rod::before,
+.gh-banner-rod::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6de, #f0c25e 45%, #a86e17 100%);
+  border: 2px solid #24160a;
+  box-shadow: 0 0 7px 1px rgba(255, 216, 128, 0.9);
+  transform: translateY(-50%);
+  animation: finial-twinkle 2.6s ease-in-out infinite;
+}
+
+.gh-banner-rod::before { left: -0.32rem; animation-delay: -0.6s; }
+.gh-banner-rod::after { right: -0.32rem; }
+
+@keyframes finial-twinkle {
+  0%, 100% { box-shadow: 0 0 6px 1px rgba(255, 216, 128, 0.7); }
+  50% { box-shadow: 0 0 11px 3px rgba(255, 224, 150, 1); }
+}
+
+.gh-banner-cloth {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 120 / 280;
+  margin-top: -1px;
+  filter: drop-shadow(0 14px 16px rgba(14, 14, 15, 0.22));
+}
+
+.gh-banner-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.gh-banner-shadow {
+  fill: #1a130c;
+  opacity: 0.88;
+}
+
+.gh-banner-fill {
+  fill: hsl(var(--banner-hue, 20) 68% 47%);
+  stroke: #1f1309;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+/* soft vertical pleats stand in for the diagonal cel-shade streak this
+   used to have: three clipped bands (light / dark / light) read as gathered
+   cloth folds the way the reference banners' flat color-blocking does. */
+.gh-pleat-light {
+  fill: #fffbf7;
+  opacity: 0.2;
+}
+
+.gh-pleat-dark {
+  fill: #0e0e0f;
+  opacity: 0.16;
+}
+
+.gh-grommet {
+  position: absolute;
+  top: 0.3rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f6dfab, #8a6a3d 60%, #4a361f 100%);
+  box-shadow: 0 0 0 1px rgba(14, 14, 15, 0.3) inset;
+  z-index: 3;
+}
+
+.gh-grommet-left { left: 13%; }
+.gh-grommet-right { right: 13%; }
+
+.gh-banner-text {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 78%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: #fffbf7;
+  text-align: center;
+  pointer-events: none;
+}
+
+.gh-banner-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  fill: #ffe6a8;
+  filter: drop-shadow(0 2px 0 rgba(14, 14, 15, 0.3));
+  margin-bottom: 0.1rem;
+}
+
+.gh-stat-value {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 0 rgba(14, 14, 15, 0.28);
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.gh-banner:hover .gh-stat-value {
+  transform: scale(1.08);
+}
+
+.gh-stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.gh-link {
+  margin-top: 1.75rem;
+}
+
+@keyframes banner-sway {
+  0%, 100% { transform: translateY(0) rotate(-1.8deg) scaleX(1); }
+  50% { transform: translateY(-3px) rotate(1.8deg) scaleX(0.985); }
+}
+
+/* ---------- scroll reveal ---------- */
+
+.reveal {
+  --enter-y: 16px;
+  --reveal-duration: 0.5s;
+  opacity: 0;
+  transform: translateY(var(--enter-y));
+  transition: opacity var(--reveal-duration) var(--ease-entrance),
+    transform var(--reveal-duration) var(--ease-entrance);
+  /* --reveal-order staggers entrance only; kept small (50ms/step) because on
+     .avatar/.tile it also delays the hover transform below (same property) */
+  transition-delay: calc(var(--reveal-order, 0) * 50ms);
+}
+
+.reveal.visible {
+  --enter-y: 0px;
+  opacity: 1;
+}
+
+/* the hero is what people see first, so give its entrance more visible
+   motion than the scroll-triggered sections further down the page */
+.hero .reveal {
+  --reveal-duration: 0.9s;
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gh-banners {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 1.75rem 1rem;
+  }
+
+  .gh-banner {
+    width: 6.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .gh-cloth-group {
+    filter: none !important;
+  }
+}
