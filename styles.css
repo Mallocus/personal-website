@@ -252,199 +252,6 @@ h2 {
 .gallery .tile:nth-child(3) { --reveal-order: 2; }
 .gallery .tile:nth-child(4) { --reveal-order: 3; }
 
-/* ---------- github banners ---------- */
-/* long, hand-drawn "parade flag" banners: a wooden rod up top, a tall
-   swallow-tailed cloth shape below rendered in SVG so the silhouette can
-   curve like fabric instead of the flat triangular pennant this used to be.
-   the .gh-defs svg (in the markup) holds the shared filter + path shapes
-   that every banner's <use> references reuse. */
-
-.gh-banners {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2.25rem 2.5rem;
-  margin: 3.5rem auto 0;
-  max-width: 50rem;
-}
-
-.gh-banner {
-  --enter-y: -7rem;
-  --enter-scale: 0.5;
-  --reveal-duration: 1s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 7.25rem;
-  transform-origin: top center;
-}
-
-.gh-banner.reveal {
-  transform: translateY(var(--enter-y)) scaleY(var(--enter-scale)) rotate(var(--banner-tilt, -2deg));
-  transition: opacity var(--reveal-duration) var(--ease-entrance),
-    transform 1.1s var(--ease-spring);
-  transition-delay: calc(var(--reveal-order, 0) * 110ms);
-}
-
-.gh-banner.reveal.visible {
-  --enter-y: 0px;
-  --enter-scale: 1;
-  --banner-tilt: 0deg;
-  animation: banner-sway 4.5s ease-in-out calc(var(--reveal-order, 0) * 110ms + 1s) infinite;
-}
-
-.gh-banner:hover.reveal.visible {
-  animation-duration: 1.8s;
-}
-
-.gh-banner:nth-child(1) { --banner-tilt: -4deg; }
-.gh-banner:nth-child(2) { --banner-tilt: 3deg; }
-.gh-banner:nth-child(3) { --banner-tilt: -2.5deg; }
-.gh-banner:nth-child(4) { --banner-tilt: 3.5deg; }
-
-.gh-banner-rod {
-  display: block;
-  width: 100%;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #ffe9ae 0%, #f0c25e 35%, #d69a2e 70%, #a86e17 100%);
-  border: 2px solid #24160a;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset;
-  position: relative;
-  z-index: 2;
-}
-
-.gh-banner-rod::before,
-.gh-banner-rod::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff6de, #f0c25e 45%, #a86e17 100%);
-  border: 2px solid #24160a;
-  box-shadow: 0 0 7px 1px rgba(255, 216, 128, 0.9);
-  transform: translateY(-50%);
-  animation: finial-twinkle 2.6s ease-in-out infinite;
-}
-
-.gh-banner-rod::before { left: -0.32rem; animation-delay: -0.6s; }
-.gh-banner-rod::after { right: -0.32rem; }
-
-@keyframes finial-twinkle {
-  0%, 100% { box-shadow: 0 0 6px 1px rgba(255, 216, 128, 0.7); }
-  50% { box-shadow: 0 0 11px 3px rgba(255, 224, 150, 1); }
-}
-
-.gh-banner-cloth {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 120 / 280;
-  margin-top: -1px;
-  filter: drop-shadow(0 14px 16px rgba(14, 14, 15, 0.22));
-}
-
-.gh-banner-svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.gh-banner-shadow {
-  fill: #1a130c;
-  opacity: 0.88;
-}
-
-.gh-banner-fill {
-  fill: hsl(var(--banner-hue, 20) 68% 47%);
-  stroke: #1f1309;
-  stroke-width: 5;
-  stroke-linejoin: round;
-}
-
-/* soft vertical pleats stand in for the diagonal cel-shade streak this
-   used to have: three clipped bands (light / dark / light) read as gathered
-   cloth folds the way the reference banners' flat color-blocking does. */
-.gh-pleat-light {
-  fill: #fffbf7;
-  opacity: 0.2;
-}
-
-.gh-pleat-dark {
-  fill: #0e0e0f;
-  opacity: 0.16;
-}
-
-.gh-grommet {
-  position: absolute;
-  top: 0.3rem;
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #f6dfab, #8a6a3d 60%, #4a361f 100%);
-  box-shadow: 0 0 0 1px rgba(14, 14, 15, 0.3) inset;
-  z-index: 3;
-}
-
-.gh-grommet-left { left: 13%; }
-.gh-grommet-right { right: 13%; }
-
-.gh-banner-text {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  width: 78%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  color: #fffbf7;
-  text-align: center;
-  pointer-events: none;
-}
-
-.gh-banner-icon {
-  width: 1.7rem;
-  height: 1.7rem;
-  fill: #ffe6a8;
-  filter: drop-shadow(0 2px 0 rgba(14, 14, 15, 0.3));
-  margin-bottom: 0.1rem;
-}
-
-.gh-stat-value {
-  font-family: 'Lexend Deca', sans-serif;
-  font-weight: 700;
-  font-size: 1.9rem;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 0 rgba(14, 14, 15, 0.28);
-  transition: transform 0.3s var(--ease-spring);
-}
-
-.gh-banner:hover .gh-stat-value {
-  transform: scale(1.08);
-}
-
-.gh-stat-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-
-.gh-link {
-  margin-top: 1.75rem;
-}
-
-@keyframes banner-sway {
-  0%, 100% { transform: translateY(0) rotate(-1.8deg) scaleX(1); }
-  50% { transform: translateY(-3px) rotate(1.8deg) scaleX(0.985); }
-}
-
 /* ---------- scroll reveal ---------- */
 
 .reveal {
@@ -475,16 +282,6 @@ h2 {
     grid-template-columns: 1fr 1fr;
   }
 
-  .gh-banners {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    gap: 1.75rem 1rem;
-  }
-
-  .gh-banner {
-    width: 6.25rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -500,8 +297,340 @@ h2 {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
+}
 
-  .gh-cloth-group {
-    filter: none !important;
-  }
+/* ---------- minecraft capes ---------- */
+.cape-summary {
+  font-weight: 600;
+  margin: 1.5rem 0 0;
+}
+
+.cape-list {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.cape-group h3,
+.cape-unobtainable > summary {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: var(--muted);
+  margin: 2.25rem 0 1rem;
+}
+
+.cape-unobtainable > summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  list-style: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.cape-unobtainable > summary::-webkit-details-marker { display: none; }
+
+.cape-unobtainable > summary::after {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.35s var(--ease-spring);
+}
+
+.cape-unobtainable[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.cape-unobtainable > summary:hover { color: var(--text); }
+
+.cape-unobtainable > summary:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.cape-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 1.25rem;
+}
+
+.cape-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 6.5rem;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* the lift is on the contents, not the button, so the clickable area never
+   moves out from under the cursor mid-click */
+.cape-card > * { transition: transform 0.25s var(--ease-spring); }
+
+.cape-card:hover > *,
+.cape-card.selected > * { transform: translateY(-4px); }
+
+.cape-card:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+
+.cape-card canvas,
+.cape-card img {
+  width: 60px;
+  height: 96px;
+  transition: filter 0.3s var(--ease-entrance), opacity 0.3s var(--ease-entrance),
+    transform 0.25s var(--ease-spring);
+}
+
+.cape-card canvas { image-rendering: pixelated; }
+.cape-card img { object-fit: contain; }
+
+.cape-card .cape-name {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--text);
+  transition: opacity 0.3s var(--ease-entrance), transform 0.25s var(--ease-spring);
+}
+
+/* missing: washed-out grey that fills in with colour on hover */
+.cape-card.missing canvas,
+.cape-card.missing img {
+  filter: grayscale(1) brightness(0.85);
+  opacity: 0.3;
+}
+
+.cape-card.missing .cape-name { opacity: 0.45; }
+
+.cape-card.missing:hover canvas,
+.cape-card.missing:hover img,
+.cape-card.missing.selected canvas,
+.cape-card.missing.selected img {
+  filter: none;
+  opacity: 0.85;
+}
+
+.cape-card.missing:hover .cape-name,
+.cape-card.missing.selected .cape-name { opacity: 0.8; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* edition switch: the heading word changes; the options are plain links below */
+.cape-edition,
+.cape-summary {
+  transition: opacity 0.5s var(--ease-entrance), transform 0.5s var(--ease-entrance);
+}
+
+.cape-edition { display: inline-block; }
+
+/* leaving: lift and fade quickly; arriving: rise from below like .reveal */
+.cape-edition.swap-out,
+.cape-summary.swap-out {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition-duration: 0.2s;
+}
+
+.cape-edition.swap-in,
+.cape-summary.swap-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: none;
+}
+
+.cape-editions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.cape-edition-link {
+  padding: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: #8a8a8a;
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+  transition: color 0.3s var(--ease-entrance);
+}
+
+.cape-edition-link:hover { color: var(--text); }
+
+.cape-edition-link.active {
+  color: var(--text);
+  text-decoration: none;
+  cursor: default;
+}
+
+.cape-edition-link:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.cape-stage {
+  overflow: hidden;
+  transition: height 0.45s var(--ease-entrance);
+}
+
+/* only while swapping, so the list snaps back instantly and its groups
+   (which carry the .reveal entrance) do the fading in */
+.cape-stage.swapping .cape-list {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-entrance);
+}
+
+/* cape detail panel: opens inline under the clicked cape's row */
+.cape-panel {
+  position: relative;
+  flex: 0 0 100%;
+  border-top: 1px solid #e4dcd2;
+  text-align: left;
+  animation: cape-panel-in 0.35s var(--ease-entrance);
+}
+
+@keyframes cape-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* small notch on the rule, pointing at the chosen cape */
+.cape-panel-notch {
+  position: absolute;
+  top: 0;
+  left: var(--notch-x, 50%);
+  width: 14px;
+  height: 7px;
+  background: #e4dcd2;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  transform: translateX(-50%);
+  transition: left 0.35s var(--ease-spring);
+}
+
+.cape-panel-inner {
+  display: flex;
+  gap: 1.75rem;
+  padding: 1.75rem 0.5rem 0.5rem;
+}
+
+.cape-panel-pic {
+  flex: none;
+  width: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cape-panel-pic img {
+  width: 100%;
+  max-height: 11.5rem;
+  object-fit: contain;
+}
+
+.cape-panel-pic canvas {
+  width: 5.6rem;
+  height: 9rem;
+  image-rendering: pixelated;
+}
+
+.cape-panel-pic.missing canvas,
+.cape-panel-pic.missing img {
+  filter: grayscale(1) brightness(0.85);
+  opacity: 0.35;
+}
+
+.cape-panel-body { flex: 1; min-width: 0; }
+
+.cape-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cape-panel-name {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.cape-panel-close {
+  padding: 0;
+  font: inherit;
+  font-size: 0.8rem;
+  color: #8a8a8a;
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.cape-panel-close:hover { color: var(--text); }
+
+.cape-panel-close:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.cape-panel-status {
+  margin: 0.15rem 0 1.1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.cape-panel-status.have { color: var(--text); }
+
+.cape-panel-facts {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.cape-panel-facts dt {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.cape-panel-facts dd {
+  font-size: 0.92rem;
+  max-width: 34rem;
+  margin: 0;
+}
+
+.cape-panel-facts dd.empty {
+  color: #8a8a8a;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .cape-panel-inner { flex-direction: column; align-items: center; gap: 1rem; }
+  .cape-panel-body { width: 100%; }
 }

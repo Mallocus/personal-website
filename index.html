@@ -72,125 +72,19 @@
     </div> -->
   </section>
 
-  <section id="github" class="content-section alt">
-    <h2 class="reveal">on github</h2>
+  <section id="capes" class="content-section alt">
+    <h2 class="reveal cape-title">minecraft <span class="cape-edition" id="cape-edition">java</span> capes</h2>
+    <div class="cape-editions reveal" role="group" aria-label="Minecraft edition">
+      <button type="button" class="cape-edition-link active" data-edition="minecraft" aria-pressed="true">java</button>
+      <button type="button" class="cape-edition-link" data-edition="dungeons" aria-pressed="false">dungeons</button>
+      <button type="button" class="cape-edition-link" data-edition="dungeons2" aria-pressed="false">dungeons II</button>
+    </div>
     <p class="copy">
-      <span class="reveal">time to compare sizes~ what's yours?</span>
+      <span class="reveal">every cape there is, and which ones i'm still missing~</span>
     </p>
 
-    <svg class="gh-defs" width="0" height="0" aria-hidden="true" focusable="false">
-      <defs>
-        <filter id="gh-cloth-ripple" x="-25%" y="-15%" width="150%" height="130%">
-          <feTurbulence type="fractalNoise" numOctaves="2" baseFrequency="0.012 0.045" seed="7" result="gh-noise">
-            <animate attributeName="baseFrequency" dur="10s" values="0.012 0.045;0.017 0.06;0.012 0.045" repeatCount="indefinite" />
-          </feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="gh-noise" scale="7" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <path id="gh-shape" d="M16 6 L104 6 C109 68 107 138 100 190 C113 208 117 242 110 270 C94 250 78 234 60 222 C42 234 26 250 10 270 C3 242 7 208 20 190 C13 138 11 68 16 6 Z" />
-        <clipPath id="gh-shape-clip">
-          <use href="#gh-shape" />
-        </clipPath>
-      </defs>
-    </svg>
-
-    <div class="gh-banners" aria-label="GitHub stats">
-      <div class="gh-banner reveal" style="--reveal-order: 0; --banner-hue: 6">
-        <span class="gh-banner-rod" aria-hidden="true"></span>
-        <div class="gh-banner-cloth">
-          <span class="gh-grommet gh-grommet-left" aria-hidden="true"></span>
-          <span class="gh-grommet gh-grommet-right" aria-hidden="true"></span>
-          <svg class="gh-banner-svg" viewBox="0 0 120 280" aria-hidden="true" focusable="false">
-            <g class="gh-cloth-group" filter="url(#gh-cloth-ripple)">
-              <use href="#gh-shape" class="gh-banner-shadow" transform="translate(4,6)" />
-              <use href="#gh-shape" class="gh-banner-fill" />
-              <g clip-path="url(#gh-shape-clip)">
-                <rect class="gh-pleat gh-pleat-light" x="26" y="2" width="13" height="230" />
-                <rect class="gh-pleat gh-pleat-dark" x="54" y="2" width="11" height="230" />
-                <rect class="gh-pleat gh-pleat-light" x="80" y="2" width="13" height="230" />
-              </g>
-            </g>
-          </svg>
-          <span class="gh-banner-text">
-            <svg class="gh-banner-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h4.17a2 2 0 0 1 1.41.59L13 6h5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/></svg>
-            <span class="gh-stat-value">1</span>
-            <span class="gh-stat-label">repos</span>
-          </span>
-        </div>
-      </div>
-      <div class="gh-banner reveal" style="--reveal-order: 1; --banner-hue: 28">
-        <span class="gh-banner-rod" aria-hidden="true"></span>
-        <div class="gh-banner-cloth">
-          <span class="gh-grommet gh-grommet-left" aria-hidden="true"></span>
-          <span class="gh-grommet gh-grommet-right" aria-hidden="true"></span>
-          <svg class="gh-banner-svg" viewBox="0 0 120 280" aria-hidden="true" focusable="false">
-            <g class="gh-cloth-group" filter="url(#gh-cloth-ripple)">
-              <use href="#gh-shape" class="gh-banner-shadow" transform="translate(4,6)" />
-              <use href="#gh-shape" class="gh-banner-fill" />
-              <g clip-path="url(#gh-shape-clip)">
-                <rect class="gh-pleat gh-pleat-light" x="26" y="2" width="13" height="230" />
-                <rect class="gh-pleat gh-pleat-dark" x="54" y="2" width="11" height="230" />
-                <rect class="gh-pleat gh-pleat-light" x="80" y="2" width="13" height="230" />
-              </g>
-            </g>
-          </svg>
-          <span class="gh-banner-text">
-            <svg class="gh-banner-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>
-            <span class="gh-stat-value">1</span>
-            <span class="gh-stat-label">followers</span>
-          </span>
-        </div>
-      </div>
-      <div class="gh-banner reveal" style="--reveal-order: 2; --banner-hue: 45">
-        <span class="gh-banner-rod" aria-hidden="true"></span>
-        <div class="gh-banner-cloth">
-          <span class="gh-grommet gh-grommet-left" aria-hidden="true"></span>
-          <span class="gh-grommet gh-grommet-right" aria-hidden="true"></span>
-          <svg class="gh-banner-svg" viewBox="0 0 120 280" aria-hidden="true" focusable="false">
-            <g class="gh-cloth-group" filter="url(#gh-cloth-ripple)">
-              <use href="#gh-shape" class="gh-banner-shadow" transform="translate(4,6)" />
-              <use href="#gh-shape" class="gh-banner-fill" />
-              <g clip-path="url(#gh-shape-clip)">
-                <rect class="gh-pleat gh-pleat-light" x="26" y="2" width="13" height="230" />
-                <rect class="gh-pleat gh-pleat-dark" x="54" y="2" width="11" height="230" />
-                <rect class="gh-pleat gh-pleat-light" x="80" y="2" width="13" height="230" />
-              </g>
-            </g>
-          </svg>
-          <span class="gh-banner-text">
-            <svg class="gh-banner-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.16 6.8.79-5.02 4.65 1.35 6.7L12 17.98l-6.1 3.82 1.35-6.7-5.02-4.65 6.8-.79z"/></svg>
-            <span class="gh-stat-value">0</span>
-            <span class="gh-stat-label">stars</span>
-          </span>
-        </div>
-      </div>
-      <div class="gh-banner reveal" style="--reveal-order: 3; --banner-hue: 200">
-        <span class="gh-banner-rod" aria-hidden="true"></span>
-        <div class="gh-banner-cloth">
-          <span class="gh-grommet gh-grommet-left" aria-hidden="true"></span>
-          <span class="gh-grommet gh-grommet-right" aria-hidden="true"></span>
-          <svg class="gh-banner-svg" viewBox="0 0 120 280" aria-hidden="true" focusable="false">
-            <g class="gh-cloth-group" filter="url(#gh-cloth-ripple)">
-              <use href="#gh-shape" class="gh-banner-shadow" transform="translate(4,6)" />
-              <use href="#gh-shape" class="gh-banner-fill" />
-              <g clip-path="url(#gh-shape-clip)">
-                <rect class="gh-pleat gh-pleat-light" x="26" y="2" width="13" height="230" />
-                <rect class="gh-pleat gh-pleat-dark" x="54" y="2" width="11" height="230" />
-                <rect class="gh-pleat gh-pleat-light" x="80" y="2" width="13" height="230" />
-              </g>
-            </g>
-          </svg>
-          <span class="gh-banner-text">
-            <svg class="gh-banner-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-10-9.2C.5 8 2 4.8 5.2 4.1 7.4 3.6 9.6 4.6 12 7.2c2.4-2.6 4.6-3.6 6.8-3.1 3.2.7 4.7 3.9 3.2 7.2-2.5 4.6-10 9.2-10 9.2z"/></svg>
-            <span class="gh-stat-value">0</span>
-            <span class="gh-stat-label">following</span>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <!-- <p class="reveal gh-link">
-      <a href="https://github.com/Mallocus" target="_blank" rel="noopener">github.com/Mallocus</a>
-    </p> -->
+    <p class="cape-summary reveal" id="cape-summary"></p>
+    <div id="cape-list" class="cape-list"></div>
   </section>
 
   <section id="contact" class="content-section">
@@ -200,6 +94,9 @@
     </p>
   </section>
 
+  <script src="data/capes.js"></script>
+  <script src="data/dungeons.js"></script>
+  <script src="data/dungeons2.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
